@@ -1,0 +1,31 @@
+# 公网 IP 获取源。至少配置两个，结果不一致时工具拒绝修改安全组。
+ip_providers:
+  - https://api4.ipify.org
+  - https://ipv4.icanhazip.com
+  - https://4.ident.me
+  - https://v4.ident.me
+  - https://ifconfig.me/ip
+
+# 本地状态文件，记录每条规则上次同步的 CIDR。
+state_file: volc-sg-sync-state.json
+inventory_db: volc-sg-sync.db
+
+# 每个端口/端口段是一条规则。规则名必须唯一。以下安全组 ID 仅为示例，安装后请通过 Web“云端发现”导入真实安全组。
+rules:
+  - name: server-a-ssh
+    region: cn-beijing
+    security_group_id: sg-xxxxxxxx
+    protocol: tcp
+    port_start: 22
+    port_end: 22
+    priority: 1
+    description: 公司出口动态IP - A服务器SSH
+
+  - name: server-b-admin
+    region: cn-shanghai
+    security_group_id: sg-yyyyyyyy
+    protocol: tcp
+    port_start: 8000
+    port_end: 8100
+    priority: 1
+    description: 公司出口动态IP - B服务器管理端口

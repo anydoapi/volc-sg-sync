@@ -1,0 +1,11 @@
+config.yaml
+config.generated.yaml
+volc-sg-sync-state.json
+volc-sg-sync.db
+volc-sg-sync.db-*
+*.log
+.env
+credentials.*
+*.web.json
+dist/
+webui/node_modules/
